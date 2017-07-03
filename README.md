@@ -1,2 +1,2 @@
 # FuzzyNIFPO
-Fuzzy modeling of NIPFOs using ForestSim
+Fuzzy modeling of NIPFOs using [ForestSim](https://github.com/forestsim-mtu/forestsim)
