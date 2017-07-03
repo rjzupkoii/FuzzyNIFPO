@@ -1,0 +1,47 @@
+/*
+ * Fuzzy inference system for NIPFO harvesting behavior.
+ */
+
+FUNCTION_BLOCK harvest
+VAR_INPUT
+	attitude: REAL;	// TODO expand this to be the environmental values
+END_VAR
+
+VAR_OUTPUT
+	result: REAL;
+END_VAR
+
+// Fuzzify the input attitudes
+FUZZIFY attitude
+	TERM one   := (0, 1) (2, 0);
+	TERM two   := (1, 0) (2, 1) (3, 1) (4, 0);
+	TERM three := (3, 0) (4, 1) (6, 1) (7, 0);
+	TERM four  := (6, 0) (7, 1) (8, 1) (9, 0);
+	TERM five  := (8, 0) (10, 1);	
+END_FUZZIFY
+
+// Defzzzify output variable 'result' : {'no', 'maybe', 'yes'}
+DEFUZZIFY result
+	TERM no    := (0, 1) (2, 1) (3, 0);
+	TERM maybe := (2, 0) (4, 1) (6, 1) (8, 0); 
+	TERM yes   := (7, 0) (8, 1) (10, 1);
+	METHOD : COG;
+	DEFAULT := 0;
+END_DEFUZZIFY
+
+// Generally we assume that NIPFOs have certain views that are in conflict with 
+// harvesting activity. For example, if they state that believe that clear 
+// cutting is not aesthetically pleasing and that they wish to preserve wild 
+// life habitat, they are unlikely to harvest
+RULEBLOCK rules
+	AND  : MIN;
+	ACT  : MIN;
+	ACCU : MAX;
+	
+	RULE 1 : IF attitude IS one OR attitude IS two THEN result IS no;
+	RULE 2 : IF attitude IS three OR attitude IS four THEN result IS maybe;
+	RULE 3 : IF attitude IS five THEN result IS yes;
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
