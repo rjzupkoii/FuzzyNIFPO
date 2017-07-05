@@ -1,4 +1,6 @@
-package edu.mtu.fuzzynipfo;
+package edu.mtu.fuzzynipfo.nipfo;
+
+import java.util.List;
 
 import edu.mtu.steppables.LandUseGeomWrapper;
 import edu.mtu.steppables.ParcelAgent;
@@ -7,26 +9,36 @@ import edu.mtu.steppables.ParcelAgentType;
 @SuppressWarnings("serial")
 public class Nipfo extends ParcelAgent  {
 
+	List<NipfoAttitude> attitudes;
+	
 	public Nipfo(ParcelAgentType type, LandUseGeomWrapper lu) {
 		super(type, lu);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void doHarvestedOperation() {
-		// TODO Auto-generated method stub
+		// Get the result of the FIS
+		NipfoFis fis = NipfoFis.getInstance();
+		double result = fis.evaluate(attitudes);
+		
+		// TODO apply the result
 		
 	}
 
 	@Override
 	protected void doPolicyOperation() {
-		// TODO Auto-generated method stub
 		
+		// TODO Write policy operation code
+	
 	}
 
 	@Override
 	protected void doHarvestOperation() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void setAttitudes(List<NipfoAttitude> value) {
+		attitudes = value;
 	}
 }

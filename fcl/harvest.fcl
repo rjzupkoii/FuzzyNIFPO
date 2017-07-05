@@ -39,18 +39,141 @@ VAR_OUTPUT
 	result: REAL;
 END_VAR
 
+// Fuzzify the parcels : {'small', 'medium', 'large'}
 FUZZIFY parcel
 	TERM small := (0, 1) (40, 1) (50, 0);
 	TERM medium := (40, 0) (50, 1) (90, 1) (100, 0);
 	TERM large := (90, 0) (100, 1);
 END_FUZZIFY
 
+// Fuzzify the concerns : {'no_concern', 'of_little_concern', 'moderate_cocern', 'concern', 'great_concern'}
 FUZZIFY CNC_CLIM
-	TERM no_concern   		:= (1, 1) (2, 0);		// 1, 8
+	TERM no_concern   		:= (1, 1) (2, 0);				// 1, 8
 	TERM of_little_concern  := (1, 0) (2, 1) (3, 0);		// 2
 	TERM moderate_concern 	:= (2, 0) (3, 1) (4, 0);		// 3
 	TERM concern  			:= (3, 0) (4, 1) (5, 0);		// 4
-	TERM great_concern  	:= (4, 0) (5, 1);			// 5
+	TERM great_concern  	:= (4, 0) (5, 1);				// 5
+END_FUZZIFY
+
+FUZZIFY CNC_DEV
+	TERM no_concern   		:= (1, 1) (2, 0);				// 1, 8
+	TERM of_little_concern  := (1, 0) (2, 1) (3, 0);		// 2
+	TERM moderate_concern 	:= (2, 0) (3, 1) (4, 0);		// 3
+	TERM concern  			:= (3, 0) (4, 1) (5, 0);		// 4
+	TERM great_concern  	:= (4, 0) (5, 1);				// 5
+END_FUZZIFY
+
+FUZZIFY CNC_FIRE
+	TERM no_concern   		:= (1, 1) (2, 0);				// 1, 8
+	TERM of_little_concern  := (1, 0) (2, 1) (3, 0);		// 2
+	TERM moderate_concern 	:= (2, 0) (3, 1) (4, 0);		// 3
+	TERM concern  			:= (3, 0) (4, 1) (5, 0);		// 4
+	TERM great_concern  	:= (4, 0) (5, 1);				// 5
+END_FUZZIFY
+
+FUZZIFY CNC_TAX
+	TERM no_concern   		:= (1, 1) (2, 0);				// 1, 8
+	TERM of_little_concern  := (1, 0) (2, 1) (3, 0);		// 2
+	TERM moderate_concern 	:= (2, 0) (3, 1) (4, 0);		// 3
+	TERM concern  			:= (3, 0) (4, 1) (5, 0);		// 4
+	TERM great_concern  	:= (4, 0) (5, 1);				// 5
+END_FUZZIFY
+
+FUZZIFY CNC_TRES
+	TERM no_concern   		:= (1, 1) (2, 0);				// 1, 8
+	TERM of_little_concern  := (1, 0) (2, 1) (3, 0);		// 2
+	TERM moderate_concern 	:= (2, 0) (3, 1) (4, 0);		// 3
+	TERM concern  			:= (3, 0) (4, 1) (5, 0);		// 4
+	TERM great_concern  	:= (4, 0) (5, 1);				// 5
+END_FUZZIFY
+
+FUZZIFY CNC_LOG_SALE
+	TERM no_concern   		:= (1, 1) (2, 0);				// 1, 8
+	TERM of_little_concern  := (1, 0) (2, 1) (3, 0);		// 2
+	TERM moderate_concern 	:= (2, 0) (3, 1) (4, 0);		// 3
+	TERM concern  			:= (3, 0) (4, 1) (5, 0);		// 4
+	TERM great_concern  	:= (4, 0) (5, 1);				// 5
+END_FUZZIFY
+
+// Fuzzify the objectives : {'not_important', 'of_little_importance', 'moderately_important', 'important', 'very_important'}
+FUZZIFY OBJ_BEA
+	TERM not_important   		:= (1, 1) (2, 0);				// 1, 8
+	TERM of_little_importance	:= (1, 0) (2, 1) (3, 0);		// 2
+	TERM moderately_important 	:= (2, 0) (3, 1) (4, 0);		// 3
+	TERM important  			:= (3, 0) (4, 1) (5, 0);		// 4
+	TERM very_important  		:= (4, 0) (5, 1);				// 5
+END_FUZZIFY
+
+FUZZIFY OBJ_CHILD
+	TERM not_important   		:= (1, 1) (2, 0);				// 1, 8
+	TERM of_little_importance	:= (1, 0) (2, 1) (3, 0);		// 2
+	TERM moderately_important 	:= (2, 0) (3, 1) (4, 0);		// 3
+	TERM important  			:= (3, 0) (4, 1) (5, 0);		// 4
+	TERM very_important  		:= (4, 0) (5, 1);				// 5
+END_FUZZIFY
+
+FUZZIFY OBJ_HUNT
+	TERM not_important   		:= (1, 1) (2, 0);				// 1, 8
+	TERM of_little_importance	:= (1, 0) (2, 1) (3, 0);		// 2
+	TERM moderately_important 	:= (2, 0) (3, 1) (4, 0);		// 3
+	TERM important  			:= (3, 0) (4, 1) (5, 0);		// 4
+	TERM very_important  		:= (4, 0) (5, 1);				// 5
+END_FUZZIFY
+
+FUZZIFY OBJ_INV
+	TERM not_important   		:= (1, 1) (2, 0);				// 1, 8
+	TERM of_little_importance	:= (1, 0) (2, 1) (3, 0);		// 2
+	TERM moderately_important 	:= (2, 0) (3, 1) (4, 0);		// 3
+	TERM important  			:= (3, 0) (4, 1) (5, 0);		// 4
+	TERM very_important  		:= (4, 0) (5, 1);				// 5
+END_FUZZIFY
+
+FUZZIFY OBJ_NAT
+	TERM not_important   		:= (1, 1) (2, 0);				// 1, 8
+	TERM of_little_importance	:= (1, 0) (2, 1) (3, 0);		// 2
+	TERM moderately_important 	:= (2, 0) (3, 1) (4, 0);		// 3
+	TERM important  			:= (3, 0) (4, 1) (5, 0);		// 4
+	TERM very_important  		:= (4, 0) (5, 1);				// 5
+END_FUZZIFY
+
+FUZZIFY OBJ_PRI
+	TERM not_important   		:= (1, 1) (2, 0);				// 1, 8
+	TERM of_little_importance	:= (1, 0) (2, 1) (3, 0);		// 2
+	TERM moderately_important 	:= (2, 0) (3, 1) (4, 0);		// 3
+	TERM important  			:= (3, 0) (4, 1) (5, 0);		// 4
+	TERM very_important  		:= (4, 0) (5, 1);				// 5
+END_FUZZIFY
+
+FUZZIFY OBJ_REC
+	TERM not_important   		:= (1, 1) (2, 0);				// 1, 8
+	TERM of_little_importance	:= (1, 0) (2, 1) (3, 0);		// 2
+	TERM moderately_important 	:= (2, 0) (3, 1) (4, 0);		// 3
+	TERM important  			:= (3, 0) (4, 1) (5, 0);		// 4
+	TERM very_important  		:= (4, 0) (5, 1);				// 5
+END_FUZZIFY
+
+FUZZIFY OBJ_TIM
+	TERM not_important   		:= (1, 1) (2, 0);				// 1, 8
+	TERM of_little_importance	:= (1, 0) (2, 1) (3, 0);		// 2
+	TERM moderately_important 	:= (2, 0) (3, 1) (4, 0);		// 3
+	TERM important  			:= (3, 0) (4, 1) (5, 0);		// 4
+	TERM very_important  		:= (4, 0) (5, 1);				// 5
+END_FUZZIFY
+
+FUZZIFY OBJ_WAT
+	TERM not_important   		:= (1, 1) (2, 0);				// 1, 8
+	TERM of_little_importance	:= (1, 0) (2, 1) (3, 0);		// 2
+	TERM moderately_important 	:= (2, 0) (3, 1) (4, 0);		// 3
+	TERM important  			:= (3, 0) (4, 1) (5, 0);		// 4
+	TERM very_important  		:= (4, 0) (5, 1);				// 5
+END_FUZZIFY
+
+FUZZIFY OBJ_WIL
+	TERM not_important   		:= (1, 1) (2, 0);				// 1, 8
+	TERM of_little_importance	:= (1, 0) (2, 1) (3, 0);		// 2
+	TERM moderately_important 	:= (2, 0) (3, 1) (4, 0);		// 3
+	TERM important  			:= (3, 0) (4, 1) (5, 0);		// 4
+	TERM very_important  		:= (4, 0) (5, 1);				// 5
 END_FUZZIFY
 
 // Defzzzify output variable 'result' : {'no', 'maybe', 'yes'}

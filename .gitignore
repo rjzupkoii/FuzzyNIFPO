@@ -1,4 +1,6 @@
 /bin/
 /target/
 /nwos/
+/shapefiles/
+
 .DS_Store
