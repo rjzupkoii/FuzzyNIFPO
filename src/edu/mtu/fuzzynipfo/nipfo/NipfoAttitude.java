@@ -2,13 +2,18 @@ package edu.mtu.fuzzynipfo.nipfo;
 
 public class NipfoAttitude {
 	private String label;
-	private int value;
+	private double value;
 	
+	public NipfoAttitude(String label, double value) {
+		this.label = label;
+		this.value = value;
+	}
+
 	public String getLabel() {
 		return label;
 	}
 	
-	public int getValue() {
+	public double getValue() {
 		return value;
 	}
 	
@@ -16,7 +21,7 @@ public class NipfoAttitude {
 		this.label = label;
 	}
 
-	public void setValue(int value) {
+	public void setValue(double value) {
 		this.value = value;
 	}
 }

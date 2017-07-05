@@ -21,7 +21,10 @@ public class Nipfo extends ParcelAgent  {
 		NipfoFis fis = NipfoFis.getInstance();
 		double result = fis.evaluate(attitudes);
 		
-		// TODO apply the result
+		// Request a harvest if appropriate
+		if (!NipfoFis.isYes(result)) {
+			return;
+		}
 		
 	}
 

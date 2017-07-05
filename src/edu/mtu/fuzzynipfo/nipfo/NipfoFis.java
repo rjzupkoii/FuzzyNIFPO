@@ -40,8 +40,15 @@ public class NipfoFis {
 		}
 		
 		// Evaluate and return the results
-		fis.evaluate();
+		fis.evaluate();		
 		double result = fis.getVariable("result").getValue();
 		return result;
+	}
+	
+	/**
+	 * Return true if the defuzzified score given evaluates to 'yes' (i.e., should harvest).
+	 */
+	public static boolean isYes(double score) {
+		return (score >= 8.0);
 	}
 }
