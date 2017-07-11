@@ -37,6 +37,7 @@ public class Nipfo extends ParcelAgent  {
 
 	@Override
 	protected void doHarvestOperation() {
+		
 		// TODO Auto-generated method stub
 		
 	}

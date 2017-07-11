@@ -13,19 +13,16 @@ public class Model extends ForestSim {
 
 	public Model(long seed) {
 		super(seed);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public ParcelAgent createEconomicAgent(MersenneTwisterFast arg0, LandUseGeomWrapper arg1) {
-		// TODO Auto-generated method stub
-		return null;
+	public ParcelAgent createEconomicAgent(MersenneTwisterFast random, LandUseGeomWrapper lu) {
+		return createAgent(random, lu);
 	}
 
 	@Override
-	public ParcelAgent createEcosystemsAgent(MersenneTwisterFast arg0, LandUseGeomWrapper arg1) {
-		// TODO Auto-generated method stub
-		return null;
+	public ParcelAgent createEcosystemsAgent(MersenneTwisterFast random, LandUseGeomWrapper lu) {
+		return createAgent(random, lu);
 	}
 
 	@Override
@@ -86,5 +83,10 @@ public class Model extends ForestSim {
 	public boolean useAggregateHarvester() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	private ParcelAgent createAgent(MersenneTwisterFast random, LandUseGeomWrapper lu) {
+		// TODO Manually-generated method stub
+		return null;
 	}
 }
