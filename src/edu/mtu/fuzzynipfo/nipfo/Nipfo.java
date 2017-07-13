@@ -1,5 +1,6 @@
 package edu.mtu.fuzzynipfo.nipfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.mtu.steppables.LandUseGeomWrapper;
@@ -13,6 +14,7 @@ public class Nipfo extends ParcelAgent  {
 	
 	public Nipfo(ParcelAgentType type, LandUseGeomWrapper lu) {
 		super(type, lu);
+		attitudes = new ArrayList<NipfoAttitude>();
 	}
 
 	@Override
@@ -40,6 +42,10 @@ public class Nipfo extends ParcelAgent  {
 		
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void addAttitude(String label, int value) {
+		attitudes.add(new NipfoAttitude(label, value));
 	}
 	
 	public void setAttitudes(List<NipfoAttitude> value) {
