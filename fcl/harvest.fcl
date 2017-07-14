@@ -14,13 +14,15 @@ VAR_INPUT
 	// NIPFO status of forest management plan
 	management    : REAL;
 
+	// NWOS has cut logs for sale before
+	CUT_LOG_SALE  : REAL;
+
 	// NWOS concerns
 	CNC_CLIM      : REAL;
 	CNC_DEV       : REAL;
 	CNC_FIRE      : REAL;
 	CNC_TAX       : REAL;
 	CNC_TRES      : REAL;
-	CNC_LOG_SALE  : REAL;
 	
 	// NWOS objectives
 	OBJ_BEA       : REAL;
@@ -48,6 +50,18 @@ END_FUZZIFY
 
 // Fuzzify green certifications : {'no', 'yes'}
 FUZZIFY certification
+	TERM no := 0;
+	TERM yes := 1;
+END_FUZZIFY
+
+// Fuzzify management plans : {'no', 'yes'}
+FUZZIFY management
+	TERM no := 0;
+	TERM yes := 1;
+END_FUZZIFY
+
+// Fuzzify CUT_LOG_SALE : {'no', 'yes'}
+FUZZIFY CUT_LOG_SALE
 	TERM no := 0;
 	TERM yes := 1;
 END_FUZZIFY
@@ -86,15 +100,6 @@ FUZZIFY CNC_TAX
 END_FUZZIFY
 
 FUZZIFY CNC_TRES
-	TERM no_concern   		:= (1, 1) (2, 0);				// 1, 8
-	TERM of_little_concern  := (1, 0) (2, 1) (3, 0);		// 2
-	TERM moderate_concern 	:= (2, 0) (3, 1) (4, 0);		// 3
-	TERM concern  			:= (3, 0) (4, 1) (5, 0);		// 4
-	TERM great_concern  	:= (4, 0) (5, 1);				// 5
-END_FUZZIFY
-
-// TODO Double check this 
-FUZZIFY CNC_LOG_SALE
 	TERM no_concern   		:= (1, 1) (2, 0);				// 1, 8
 	TERM of_little_concern  := (1, 0) (2, 1) (3, 0);		// 2
 	TERM moderate_concern 	:= (2, 0) (3, 1) (4, 0);		// 3
@@ -203,18 +208,27 @@ RULEBLOCK rules
 	
 	// Harvesting based upon parcel size
 	RULE 1 : IF parcel IS small THEN result IS no;
-	RULE 2 : IF parcel IS large THEN result IS yes;
+	RULE 2 : IF parcel IS medium THEN result IS maybe;
+	RULE 3 : IF parcel IS large THEN result IS yes;
 	
 	// Harvesting based upon concerns
-	
-	
+	RULE 4 : IF CNC_CLIM IS concern OR CNC_CLIM IS great_concern THEN result IS no;
+	RULE 5 : IF CNC_FIRE IS concern OR CNC_FIRE IS great_concern THEN result IS maybe;
+		
 	// Harvesting based upon objectives
-	RULE 3 : IF OBJ_BEA IS not_important OR OBJ_BEA IS of_little_importance THEN result IS yes;
-	RULE 4 : IF OBJ_NAT IS NOT not_important AND OBJ_NAT IS NOT of_little_importance THEN result IS no;
-	RULE 5 : IF OBJ_TIM IS NOT not_important AND OBJ_TIM IS NOT of_little_importance THEN result IS yes;
-	
+	RULE 6 : IF OBJ_BEA IS important OR OBJ_BEA IS very_important THEN result IS no;
+	RULE 7 : IF OBJ_NAT IS important OR OBJ_NAT IS very_important THEN result IS no;
+	RULE 8 : IF OBJ_WIL IS important OR OBJ_WIL IS very_important THEN result IS no;
+	RULE 9 : IF OBJ_TIM IS important OR OBJ_TIM IS very_important THEN result IS yes;
+		
+	// Previous harvesting may indicate future harvesting
+	RULE 10 : IF CUT_LOG_SALE IS yes THEN result IS maybe;
+		
 	// Harvesting based upon certifications
-	RULE 6 : IF certification IS yes THEN result IS yes; 
+	RULE 11 : IF certification IS yes THEN result IS yes; 
+	
+	// Harvesting based upon management plan
+	RULE 12 : IF management IS yes THEN result IS yes;
 		
 END_RULEBLOCK
 

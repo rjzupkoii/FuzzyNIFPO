@@ -9,11 +9,11 @@ import org.junit.Test;
 public class NipfoFisTest {
 	
 	private static final double epsilon = 1e-15;
-
-	private static double dontHarvestScore = 0.0;
+	
+	private static double dontHarvestScore = 1.2641317365269507;
 	private static List<NipfoAttitude> dontHarvestAttitudes = new ArrayList<NipfoAttitude>();
 	static {
-		dontHarvestAttitudes.add(new NipfoAttitude("parcel", 50.0));
+		dontHarvestAttitudes.add(new NipfoAttitude("parcel", 20.0));
 		dontHarvestAttitudes.add(new NipfoAttitude("certification", 0.0));
 		dontHarvestAttitudes.add(new NipfoAttitude("tax", 0.0));
 		dontHarvestAttitudes.add(new NipfoAttitude("management", 0.0));

@@ -109,10 +109,13 @@ public class Model extends ForestSim {
 		
 		// Assign the agent's parcel
 		agent = (Nipfo)createAgentParcel(agent);
+
+		double area = agent.getParcelArea();
+		agent.addAttitude("parcel", area);
+		ParcelSize size = ParcelSize.getSize(area);
 		
 		// Assign the attributes to the agent based upon the parcel assigned
-		NipfoFis fis = NipfoFis.getInstance();
-		ParcelSize size = ParcelSize.getSize(agent.getParcelArea()); 
+		NipfoFis fis = NipfoFis.getInstance();	
 		for (String attitude : fis.getAttitudeList()) {
 			// Get the map and the sorted list of keys
 			HashMap<Integer, Double> map = fis.getAttitudeMap(attitude, size);

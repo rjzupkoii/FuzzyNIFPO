@@ -82,6 +82,13 @@ public class NipfoFis {
 	}
 	
 	/**
+	 * Return true if the defuzzified score given evaluates to 'no' (i.e., should not harvest).
+	 */
+	public static boolean isNo(double score) {
+		return (score <= 2.0);
+	}
+	
+	/**
 	 * Return true if the defuzzified score given evaluates to 'yes' (i.e., should harvest).
 	 */
 	public static boolean isYes(double score) {
@@ -99,7 +106,7 @@ public class NipfoFis {
 		for (File file : new File(path).listFiles()) {
 			// Get the base name
 			String name = file.getName();
-			name = name.substring(0, name.indexOf('.') - 1);
+			name = name.substring(0, name.indexOf('.'));
 			
 			// Place the loaded map
 			attitudes.put(name, loadAttitudeMap(file));
