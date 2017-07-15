@@ -1,10 +1,12 @@
 package edu.mtu.wup.model.scorecard;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import edu.mtu.fuzzynipfo.nipfo.Nipfo;
 import edu.mtu.measures.ForestMeasuresParallel;
 import edu.mtu.simulation.ForestSim;
 import edu.mtu.simulation.Scorecard;
@@ -77,6 +79,7 @@ public class WupScorecard implements Scorecard {
 				writers[ndx].close();
 			}
 			writeGisFiles(state);
+			writeHarvested(state);
 		} catch (IOException ex) {
 			System.err.println("Unhandled IOException: " + ex.toString());
 			System.exit(-1);
@@ -94,6 +97,7 @@ public class WupScorecard implements Scorecard {
 		return 0.475 * biomass; 
 	}
 	
+	
 	// Society: Aesthetics, Environment: Habitat Connectivity
 	private void writeGisFiles(ForestSim state) throws IOException {
 		if (!writeGis) {
@@ -110,6 +114,28 @@ public class WupScorecard implements Scorecard {
 		String fileName = String.format(filesDirectory + nipfoFile, state.schedule.getSteps());
 		GeomVectorField parcels = state.getParcelLayer();
 		ShapeFileExporter.write(fileName, parcels);
+	}
+	
+	// Total agents who harvested, total size of harvested parcels
+	private void writeHarvested(ForestSim state) throws IOException {
+		int agents = 0;
+		double area = 0;
+		
+		// Note the data
+		for (ParcelAgent pa : state.getParcelAgents()) {
+			Nipfo agent = (Nipfo)pa;
+			if (agent.didHarvest()) {
+				agents++;
+				area += agent.getParcelArea();
+			}
+		}
+		
+		// Write the data to disk
+		FileWriter writer = new FileWriter(outputDirectory + "/harvested.csv", true);
+		writer.write(state.getParcelAgents().size() + ",");
+		writer.write(agents + ",");
+		writer.write(area + System.lineSeparator());
+		writer.close();
 	}
 
 	// Environment: Carbon Sequestration

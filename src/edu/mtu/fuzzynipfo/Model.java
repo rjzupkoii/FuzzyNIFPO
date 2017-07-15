@@ -106,10 +106,12 @@ public class Model extends ForestSim {
 	protected ParcelAgent createAgent(LandUseGeomWrapper lu, double probablity) {
 		// Create the agent
 		Nipfo agent = new Nipfo(ParcelAgentType.OTHER, lu);
+		agent.setPhaseInRate(ModelParameters.LandTenurePhaseInRate);
 		
 		// Assign the agent's parcel
 		agent = (Nipfo)createAgentParcel(agent);
 
+		// Assign the parcel area attribute
 		double area = agent.getParcelArea();
 		agent.addAttitude("parcel", area);
 		ParcelSize size = ParcelSize.getSize(area);

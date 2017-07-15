@@ -11,10 +11,13 @@ public class ModelParameters extends ParameterBase {
 	public static final String nwos = "nwos/clean";
 	
 	// Path to output directory
-	public static final String outputDirectory = "out";
+	public static final String outputDirectory = "out/fis";
 	
 	// About 10% of NIPFOs
 	public static final int loggingCapacity = 2500;
+	
+	// The number of NIPFOs that should be phased in per time-step, prevents unrealistic saw-toothing
+	public final static double LandTenurePhaseInRate = 0.02;
 	
 	public ModelParameters() {
 		setFinalTimeStep(200);

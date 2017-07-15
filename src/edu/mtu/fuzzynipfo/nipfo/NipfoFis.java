@@ -82,17 +82,24 @@ public class NipfoFis {
 	}
 	
 	/**
+	 * Return true if the defuzzified score should be treated as 'maybe'
+	 */
+	public static boolean isMaybe(double score) {
+		return (!isNo(score) && !isYes(score));
+	}
+	
+	/**
 	 * Return true if the defuzzified score given evaluates to 'no' (i.e., should not harvest).
 	 */
 	public static boolean isNo(double score) {
-		return (score <= 2.0);
+		return (score <= 0.4);
 	}
 	
 	/**
 	 * Return true if the defuzzified score given evaluates to 'yes' (i.e., should harvest).
 	 */
 	public static boolean isYes(double score) {
-		return (score >= 8.0);
+		return (score >= 0.9);
 	}
 	
 	/**
